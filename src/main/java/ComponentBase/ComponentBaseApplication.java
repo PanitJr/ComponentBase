@@ -9,12 +9,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ComponentBase.role.Role;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 import java.util.HashSet;
 import java.util.Set;
 @EnableAutoConfiguration
 @SpringBootApplication
-public class ComponentBaseApplication implements CommandLineRunner {
+public class ComponentBaseApplication extends SpringBootServletInitializer implements CommandLineRunner {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
@@ -24,16 +26,22 @@ public class ComponentBaseApplication implements CommandLineRunner {
 		SpringApplication.run(ComponentBaseApplication.class, args);
 
 	}
+	@Override
+	protected SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
+
+		return application.sources(ComponentBaseApplication.class);
+	}
 
 	@Override
 	public void run(String... args) throws Exception {
 		userRepository.deleteAll();
 		Role adminRole = new Role("admin");
+		Role customerRole = new Role("customer");
+		roleRepository.save(customerRole);
 		roleRepository.save(adminRole);
 		Set<Role> roles = new HashSet<>();
 		roles.add(adminRole);
 		userRepository.save(new User("panit","panit","jaijaroen","panit_j@cmu.ac.th","1234",roles));
-		userRepository.insert(new User("paniy","paniy","jaijaroen","panit_j@cmu.ac.th","1234",roles));
 
 	}
 }

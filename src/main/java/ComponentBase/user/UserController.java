@@ -21,7 +21,7 @@ public class UserController {
     @RequestMapping(value = "/user/{id}",method = RequestMethod.GET)
     public User getUser(@PathVariable("id") String id){return userService.getUser(id);}
 
-    @RequestMapping(value = "register",method = RequestMethod.POST)
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
     public @ResponseBody
     User add(@RequestBody User user, BindingResult bindingResult){
         return userService.create(user);

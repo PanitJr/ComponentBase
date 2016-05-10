@@ -4,6 +4,7 @@ package ComponentBase.user;
 import ComponentBase.address.Address;
 import ComponentBase.role.Role;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,7 +21,9 @@ public class User {
     private String id;
     private String name;
     private String surname;
+    @Indexed(unique = true)
     private String username;
+    @Indexed(unique = true)
     private String email;
     private String password;
     private Date dob;

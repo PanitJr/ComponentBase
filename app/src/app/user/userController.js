@@ -6,7 +6,8 @@
 
   angular
     .module('app')
-    .controller('listUserController', listUserController);
+    .controller('listUserController', listUserController)
+    .controller('registerUserController', registerUserController);
 
   /** @ngInject */
   function listUserController(userService, userSearchService) {
@@ -24,5 +25,16 @@
       });
     }
 
+  }
+  /**@ngInject*/
+  function registerUserController(userService,$location) {
+    var vm = this;
+    vm.confirmPasswordCheck = function () {
+      
+    }
+    vm.addUser = function () {
+      userService.save(vm.user);
+      $location.path("users");
+    }
   }
 })();
