@@ -23,5 +23,6 @@ public interface UserService {
     User edit(User user);
     User delete(String id);
     User getUser(String id);
+    User addAddress(Address address,String id);
 
 }

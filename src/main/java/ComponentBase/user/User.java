@@ -5,6 +5,7 @@ import ComponentBase.address.Address;
 import ComponentBase.role.Role;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,7 +16,7 @@ import java.util.Set;
  * Created by waiti on 5/1/2016.
  */
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint( columnNames = {"email"}))
+@Document
 public class User {
     @Id
     private String id;
@@ -23,14 +24,14 @@ public class User {
     private String surname;
     @Indexed(unique = true)
     private String username;
+    private String password;
     @Indexed(unique = true)
     private String email;
-    private String password;
+    private boolean accountConfirm;
     private Date dob;
+    @Indexed(unique = true)
     private String phoneNumber;
-    @OneToMany(mappedBy = "owner")
     private Set<Address> addresses = new HashSet<>();
-    @OneToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
     public User() {
@@ -58,6 +59,14 @@ public class User {
                 ", addresses=" + addresses +
                 ", roles=" + roles +
                 '}';
+    }
+
+    public boolean isAccountConfirm() {
+        return accountConfirm;
+    }
+
+    public void setAccountConfirm(boolean accountConfirm) {
+        this.accountConfirm = accountConfirm;
     }
 
     public String getUsername() {
@@ -110,6 +119,17 @@ public class User {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    public Role getRole() {
+        Role current = new Role("customer");
+        for (Role role : this.roles) {
+            if (role.getRoleName().equals("admin")){return role;}
+            else if(role.getRoleName().equals("wholesaler")){return role;}
+            else if(role.getRoleName().equals("retailer")){return role;}
+            else {current = role;}
+        }
+        return current;
     }
 
     public void setRoles(Set<Role> roles) {

@@ -1,5 +1,6 @@
 package ComponentBase.user;
 
+import ComponentBase.address.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -39,4 +40,8 @@ public class UserController {
     //service
     @RequestMapping(value = "/user/search/{name}",method = RequestMethod.GET)
     public List<User> findUserBySurName (@PathVariable("name") String name){return userService.findByName(name);}
+
+    @RequestMapping(value = "/user/addAddress/{id}",method = RequestMethod.PUT)
+    public  User addAddress (@PathVariable("id") String id, @RequestBody Address address)
+    {return userService.addAddress(address,id);}
 }

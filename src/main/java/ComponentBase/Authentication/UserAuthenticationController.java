@@ -1,4 +1,4 @@
-package ComponentBase.Authentication;
+package ComponentBase.authentication;
 
 import ComponentBase.transfer.TokenTransfer;
 import ComponentBase.transfer.UserTransfer;

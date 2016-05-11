@@ -1,6 +1,7 @@
 package ComponentBase.address;
 
 import ComponentBase.user.User;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.OneToMany;
  * Created by waiti on 5/1/2016.
  */
 @Entity
+@Document
 public class Address {
     @Id
     private String id;
