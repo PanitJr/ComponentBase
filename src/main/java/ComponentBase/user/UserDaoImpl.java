@@ -1,6 +1,5 @@
 package ComponentBase.user;
 
-import ComponentBase.address.Address;
 import ComponentBase.repository.UserRepository;
 import ComponentBase.role.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by waiti on 5/1/2016.
@@ -57,8 +57,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findByRoles(Role role) {
-        return userRepository.findByRoles(role);
+    public List<User> findByRoles(Set<Role> roles) {
+        return userRepository.findByRoles(roles);
     }
 
     @Override

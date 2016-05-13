@@ -1,5 +1,8 @@
 package ComponentBase.role;
 
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -8,6 +11,7 @@ import java.io.Serializable;
  * Created by waiti on 5/1/2016.
  */
 @Entity
+@Document
 public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

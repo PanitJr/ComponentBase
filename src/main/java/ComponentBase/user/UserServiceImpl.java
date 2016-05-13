@@ -1,13 +1,16 @@
 package ComponentBase.user;
 
-import ComponentBase.address.Address;
+import ComponentBase.message.Message;
+import ComponentBase.repository.RoleRepository;
 import ComponentBase.role.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by waiti on 5/1/2016.
@@ -17,6 +20,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
+    @Autowired
+    RoleRepository roleRepository;
     @Override
     public List<User> getUsers() {
         return userDao.getUsers();
@@ -58,17 +63,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findByRoles(Role role) {
-        return userDao.findByRoles(role);
+    public List<User> findByRoles(Set<Role> roles) {
+        return userDao.findByRoles(roles);
     }
 
     @Override
     public User create(User user) {
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findByRoleName("customer"));
+        Message newUser = new Message("Welcome","Welcome to Watphasom Online Shop");
+        user.getMessages().add(newUser);
+        user.setRoles(roles);
         return userDao.create(user);
+    }
+    public User addAddress(Address address,String id){
+        User user = getUser(id);
+        user.getAddresses().add(address);
+        Message userAddAddress = new Message("User add address","your Account has added new address");
+        user.getMessages().add(userAddAddress);
+        return userDao.edit(user);
     }
 
     @Override
     public User edit(User user) {
+        Message userEdit = new Message("User update","Your Account Has been Update");
+        user.getMessages().add(userEdit);
         return userDao.edit(user);
     }
 

@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Nofication</div>
+  <div class="panel-body">
+    <div class="col-lg-6">
+        <table class="table table-hover">
+          <tr>
+            <th>Subject</th>
+            <th>Detail</th>
+          </tr>
+          <tr ng-repeat="message in vm.messages">
+            <td>{{message.header}}</td>
+            <td>{{message.content}}</td>
+          </tr>
+          <tr>
+            <th>
+            </th>
+            <th></th>
+          </tr>
+        </table>
+
+    </div>
+  </div>
+</div>

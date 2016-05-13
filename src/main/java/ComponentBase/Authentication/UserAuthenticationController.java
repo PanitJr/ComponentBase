@@ -1,4 +1,4 @@
-package ComponentBase.Authentication;
+package ComponentBase.authentication;
 
 import ComponentBase.transfer.TokenTransfer;
 import ComponentBase.transfer.UserTransfer;
@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/watphasom")
+@RequestMapping("/auth")
 public class UserAuthenticationController {
     @Autowired
     UserDetailsService userDetailsService;

@@ -21,7 +21,7 @@ public class UserController {
     @RequestMapping(value = "/user/{id}",method = RequestMethod.GET)
     public User getUser(@PathVariable("id") String id){return userService.getUser(id);}
 
-    @RequestMapping(value = "register",method = RequestMethod.POST)
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
     public @ResponseBody
     User add(@RequestBody User user, BindingResult bindingResult){
         return userService.create(user);
@@ -38,5 +38,9 @@ public class UserController {
     }
     //service
     @RequestMapping(value = "/user/search/{name}",method = RequestMethod.GET)
-    public List<User> findUserBySurName (@PathVariable("name") String name){return userService.findByName(name);}
+    public User findUserByUsername (@PathVariable("name") String name){return userService.findByUsername(name);}
+
+    @RequestMapping(value = "/user/addAddress/{id}",method = RequestMethod.PUT)
+    public  User addAddress (@PathVariable("id") String id, @RequestBody Address address)
+    {return userService.addAddress(address,id);}
 }

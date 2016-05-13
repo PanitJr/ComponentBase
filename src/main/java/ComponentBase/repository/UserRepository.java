@@ -1,12 +1,13 @@
 package ComponentBase.repository;
 
 import ComponentBase.role.Role;
-import ComponentBase.address.Address;
+import ComponentBase.user.Address;
 import ComponentBase.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by waiti on 5/1/2016.
@@ -20,5 +21,5 @@ public interface UserRepository extends MongoRepository<User, String> {
     List<User> findByPhoneNumber(String phoneNumber);
     List<User> findByAddresses(Address address);
     List<User> findByDob(Date dob);
-    List<User> findByRoles(Role role);
+    List<User> findByRoles(Set<Role> roles);
 }

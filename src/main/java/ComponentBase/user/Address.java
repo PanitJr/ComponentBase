@@ -1,18 +1,13 @@
-package ComponentBase.address;
+package ComponentBase.user;
 
-import ComponentBase.user.User;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 /**
  * Created by waiti on 5/1/2016.
  */
 @Entity
 public class Address {
-    @Id
-    private String id;
     private String number;
     private String village;
     private String street;
@@ -20,14 +15,12 @@ public class Address {
     private String district;
     private String privince;
     private String postal;
-    @OneToMany
-    private User owner;
 
     public Address() {
 
     }
 
-    public Address(String number, String village, String street, String subDistrict, String district, String privince, String postal, User owner) {
+    public Address(String number, String village, String street, String subDistrict, String district, String privince, String postal) {
         this.number = number;
         this.village = village;
         this.street = street;
@@ -35,17 +28,9 @@ public class Address {
         this.district = district;
         this.privince = privince;
         this.postal = postal;
-        this.owner = owner;
-    }
 
-    public String getId() {
-        return id;
     }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
+    
     public String getNumber() {
         return number;
     }
@@ -102,11 +87,4 @@ public class Address {
         this.postal = postal;
     }
 
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
 }

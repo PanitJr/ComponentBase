@@ -6,7 +6,7 @@
   angular.module('app').factory('UserService',UserService)
   /**ngInject*/
   function UserService($resource){
-    return $resource('/watphasom/:action',{},
+    return $resource('/auth/:action',{},
       {authenticate:
       {
         method:'POST',

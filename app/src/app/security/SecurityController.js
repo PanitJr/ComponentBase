@@ -3,7 +3,10 @@
  */
 (function () {
 
-  angular.module('app').controller('LoginController',LoginController);
+  angular.module('app')
+    .controller('LoginController',LoginController)
+    .controller('ForgotPasswordController',ForgotPasswordController);
+  
   function serializeData(data) {
     //if this not an object
     if(!angular.isObject(data)){
@@ -49,6 +52,13 @@
             $rootScope.error =" username or passoword is not correct";
           }
         })
+    }
+  }
+  /**ngInject*/
+  function ForgotPasswordController($http,$location) {
+    var vm = this;
+    vm.forgotPassword = function () {
+      $http.post("http://localhost:8080/passwordRecovery",vm.user).then(function () {$location.path("/")})
     }
   }
 })();
