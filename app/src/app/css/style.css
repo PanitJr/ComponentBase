@@ -46,7 +46,8 @@ body{
 }
 .logo{
 	float:left;
-	width:33%;
+	width:200px;
+  height: 200px;
 }
 /**** Header Top Right ****/
 .header_top_right{
