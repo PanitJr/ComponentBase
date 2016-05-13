@@ -68,7 +68,7 @@ public class OrderServiceImpl implements OrderService{
         Date date = new Date();
         order.setOpen(date);
         User user = userRepository.findOne(order.getCustomerId());
-        Message message = new Message("New Order","New Order was created by User id: "+user.getUsername());
+        Message message = new Message("New Order","New Order was created by Username: "+user.getUsername());
         user.getMessages().add(message);
         userRepository.save(user);
         Set<Role> roles = new HashSet<>();

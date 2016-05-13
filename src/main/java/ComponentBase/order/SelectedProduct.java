@@ -9,6 +9,9 @@ public class SelectedProduct {
     private Product product;
     private int amount;
 
+    public SelectedProduct() {
+    }
+
     public SelectedProduct(int amount, Product product) {
         this.amount = amount;
         this.product = product;

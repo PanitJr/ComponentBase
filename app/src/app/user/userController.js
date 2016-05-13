@@ -42,7 +42,7 @@
   function notificationUserController($rootScope,$http) {
     var vm = this;
     $http.get("http://localhost:8080/user/search/"+$rootScope.user.name).then(function (data) {
-      vm.messages = data.data[0].messages;
+      vm.messages = data.data.messages;
     })
 }
 })();
