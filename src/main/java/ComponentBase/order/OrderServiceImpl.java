@@ -1,7 +1,13 @@
 package ComponentBase.order;
 
 import ComponentBase.email.EmailSender;
+import ComponentBase.image.Image;
+import ComponentBase.image.ImageUtil;
+import ComponentBase.message.Message;
+import ComponentBase.product.Product;
+import ComponentBase.repository.RoleRepository;
 import ComponentBase.repository.UserRepository;
+import ComponentBase.role.Role;
 import ComponentBase.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +15,9 @@ import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by panit on 5/11/2016.
@@ -19,6 +27,12 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     OrderDao orderDao;
+
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+
     @Override
     public List<Order> getOrders() {
         return orderDao.getOrders();
@@ -53,13 +67,22 @@ public class OrderServiceImpl implements OrderService{
     public Order create(Order order) {
         Date date = new Date();
         order.setOpen(date);
-        //OrderNotification();
+        User user = userRepository.findOne(order.getCustomerId());
+        Message message = new Message("New Order","New Order was created by User id: "+user.getUsername());
+        user.getMessages().add(message);
+        userRepository.save(user);
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findByRoleName("admin"));
+        List<User> admins = userRepository.findByRoles(roles);
+        for (User admin : admins) {
+            admin.getMessages().add(message);
+            userRepository.save(admin);
+        }
         return orderDao.create(order);
     }
 
     @Override
     public Order update(Order order) {
-        //OrderNotification();
         return orderDao.update(order);
     }
 
@@ -68,10 +91,9 @@ public class OrderServiceImpl implements OrderService{
         return orderDao.delete(order);
     }
 
-    @Autowired
-    private UserRepository userRepository;
+
     @Override
-    public Order setTotalCost(Order order) {
+    public void setTotalCost(Order order) {
 
         User customer = userRepository.findOne(order.getCustomerId());
         double total = 0;
@@ -89,28 +111,37 @@ public class OrderServiceImpl implements OrderService{
             for (SelectedProduct selectProduct: order.getSelectedProducts()) {
                 total += selectProduct.getAmount()*selectProduct.getProduct().getPriceWholesaler();
             }
-        }else {
+        }
+        else {
             for (SelectedProduct selectProduct: order.getSelectedProducts()) {
                 total += selectProduct.getAmount()*selectProduct.getProduct().getPrice();
             }
         }
         total += order.getTransportCost();
         order.setTotalPrice(total);
-        //OrderNotification();
-        return orderDao.update(order);
     }
 
     @Override
     public Order setTransportCost(Order order, double transportCost) {
+        User user = userRepository.findOne(order.getCustomerId());
+        Message message = new Message("Order On "+order.getOpen()+"was set transport cost","Your order " +
+                "is set the transport cost see detail and confirm your order for continue, " +
+                "After you confirm you can make payment for this order");
+        user.getMessages().add(message);
+        userRepository.save(user);
         order.setTransportCost(transportCost);
-        //OrderNotification();
+        setTotalCost(order);
+
         return orderDao.update(order);
     }
 
     @Override
     public Order setConfirmOrder(Order order, boolean confirm) {
         order.setConfirmed(confirm);
-        //OrderNotification();
+        User user = userRepository.findOne(order.getCustomerId());
+        Message message = new Message("Order On "+order.getOpen()+"was confirmed","Make payment to continue");
+        user.getMessages().add(message);
+        userRepository.save(user);
         return orderDao.update(order);
     }
 
@@ -118,15 +149,29 @@ public class OrderServiceImpl implements OrderService{
     public Order setConfirmPayment(Order order) {
         Date date = new Date();
         order.setClose(date);
-        //OrderNotification();
+        User user = userRepository.findOne(order.getCustomerId());
+        Message message = new Message("Order On "+order.getOpen()+"was paid","Wait for transportation");
+        user.getMessages().add(message);
+        userRepository.save(user);
         return orderDao.create(order);
     }
 
-    @Autowired
-    private EmailSender smtpMailSender;
 
     @Override
-    public void OrderNotification(Order order) {
-
+    public Order addImage(Order order, Image image) {
+        image= ImageUtil.resizeImage(image,200);
+        order.getImages().add(image);
+        orderDao.update(order);
+        Message message = new Message("Order Paid: " +order.getId(),"Order paid by Customer money tranfer " +
+                "please confirm payment for your customer");
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findByRoleName("admin"));
+        List<User> admins = userRepository.findByRoles(roles);
+        for (User admin : admins) {
+            admin.getMessages().add(message);
+            userRepository.save(admin);
+        }
+        return order;
     }
+
 }

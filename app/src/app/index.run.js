@@ -40,17 +40,7 @@
   }
 
   /** @ngInject */
-  function runBlock($log,$rootScope) {
-
-    $rootScope.hasRole = function (role) {
-      if ($rootScope.user == undefined){
-        return false;
-      }
-      if ($rootScope.user.roles[role] == undefined){
-        return false;
-      }
-      return $rootScope.user.roles[role];
-    }
+  function runBlock($log) {
     $log.debug('runBlock end');
   }
 

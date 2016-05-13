@@ -1,5 +1,7 @@
 package ComponentBase.order;
 
+import ComponentBase.image.Image;
+import ComponentBase.product.Product;
 import ComponentBase.user.User;
 
 import java.util.Date;
@@ -18,10 +20,10 @@ public interface OrderService {
     Order create(Order order);
     Order update(Order order);
     Order delete(Order order);
-    Order setTotalCost(Order order);
+    void setTotalCost(Order order);
     Order setTransportCost(Order order,double transportCost);
     Order setConfirmOrder(Order Order,boolean confirm);
     Order setConfirmPayment(Order order);
-    void OrderNotification(Order order);
+    Order addImage(Order order, Image image);
 
 }

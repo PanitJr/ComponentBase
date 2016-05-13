@@ -1,5 +1,6 @@
 package ComponentBase.order;
 
+import ComponentBase.image.Image;
 import ComponentBase.user.User;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -24,6 +25,7 @@ public class Order {
     private String transportType;
     private double transportCost;
     private boolean confirmed;
+    private Set<Image> tranferment = new HashSet<>();
     private boolean pay;
     private String customerId;
 
@@ -33,6 +35,14 @@ public class Order {
         this.selectedProducts = selectedProducts;
         this.customerId = customerId;
         this.transportType= transportType;
+    }
+
+    public Set<Image> getImages() {
+        return this.tranferment;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.tranferment = images;
     }
 
     public boolean isPay() {

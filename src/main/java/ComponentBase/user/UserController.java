@@ -38,7 +38,7 @@ public class UserController {
     }
     //service
     @RequestMapping(value = "/user/search/{name}",method = RequestMethod.GET)
-    public List<User> findUserBySurName (@PathVariable("name") String name){return userService.findByName(name);}
+    public User findUserByUsername (@PathVariable("name") String name){return userService.findByUsername(name);}
 
     @RequestMapping(value = "/user/addAddress/{id}",method = RequestMethod.PUT)
     public  User addAddress (@PathVariable("id") String id, @RequestBody Address address)

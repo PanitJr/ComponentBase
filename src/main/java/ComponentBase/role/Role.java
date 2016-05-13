@@ -16,7 +16,6 @@ public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String id;
-    @Indexed(unique = true)
     private String roleName;
 
     public Role (String roleName) {

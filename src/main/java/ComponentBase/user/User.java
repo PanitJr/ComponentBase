@@ -1,6 +1,7 @@
 package ComponentBase.user;
 
 
+import ComponentBase.message.Message;
 import ComponentBase.role.Role;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -26,12 +27,13 @@ public class User {
     private String password;
     @Indexed(unique = true)
     private String email;
-    private boolean accountConfirm;
+    private boolean accountConfirm = false;
     private Date dob;
     @Indexed(unique = true)
     private String phoneNumber;
     private Set<Address> addresses = new HashSet<>();
     private Set<Role> roles = new HashSet<>();
+    private Set<Message> messages = new HashSet<>();
 
     public User() {
     }
@@ -60,6 +62,14 @@ public class User {
                 ", addresses=" + addresses +
                 ", roles=" + roles +
                 '}';
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
     }
 
     public boolean isAccountConfirm() {
