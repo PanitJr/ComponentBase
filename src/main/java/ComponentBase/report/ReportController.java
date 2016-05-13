@@ -1,13 +1,18 @@
 package ComponentBase.report;
 
+import ComponentBase.order.Order;
+import ComponentBase.order.OrderService;
 import net.sf.jasperreports.engine.*;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,25 +28,22 @@ import java.util.List;
 public class ReportController {
     final static Logger logger = Logger.getLogger(ReportController.class);
     final static String pdfSource = "src/main/resources/static/jasper/report.pdf";
-
-    private void generateReport(List<User> cities) throws JRException {
+    private void generateReport(List<Order> orders) throws JRException {
         logger.info("[!] Start generate report");
         // Path to our template goes here
         JasperReport jasperReport = JasperCompileManager.compileReport("src/main/resources/static/jasper/report.jrxml");
         // load data to datasource
-        CustomJRDataSource<User> dataSource = new CustomJRDataSource<User>().using(cities);
+        JRDataSource<Order> dataSource = new JRDataSource<Order>().using(orders);
         // Map datasource to template
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap<String,Object>(), dataSource);
         // Export to pdf
         JasperExportManager.exportReportToPdfFile(jasperPrint,pdfSource);
     }
-    @RequestMapping(value = "/getReport", method = RequestMethod.GET)
-    public HttpEntity<byte[]> getReport() throws JRException,IOException {
+    @RequestMapping(value = "/getOrder/{id}", method = RequestMethod.GET)
+    public HttpEntity<byte[]> getReport(@PathVariable("id")String id) throws JRException,IOException {
         // Stub data
-        User c = new User("Chiang Mai",22);
-        User c1 = new User("Bangkok", 11);
-        List<User> cities = Arrays.asList(c,c1);
-        generateReport(cities);
+
+//        generateReport(orders);
         logger.info("[+] Generated report successfully");
 
         // Force download

@@ -1,6 +1,5 @@
 package ComponentBase.report;
 
-import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRField;
 
@@ -17,7 +16,7 @@ import java.util.List;
 /*
 * Credit: https://github.com/evgenyigumnov/spring-boot-security-rest-thymleaf-angularjs-bootstrap-jasperreports-jpa-seed
 */
-public class UserJRDataSource<T> implements JRDataSource {
+public class JRDataSource<T> implements net.sf.jasperreports.engine.JRDataSource {
 
     private Iterator<T> iterator;
     private Object currentObject;
@@ -50,7 +49,7 @@ public class UserJRDataSource<T> implements JRDataSource {
         throw new JRException("Field " + jrField.getName() + " error");
     }
 
-    public UserJRDataSource<T> using(List<T> list) {
+    public JRDataSource<T> using(List<T> list) {
         this.iterator = list.iterator();
         return this;
     }

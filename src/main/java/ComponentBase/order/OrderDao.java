@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface OrderDao {
     List<Order> getOrders();
-    List<Order> getOrderByCustomer(User user);
+    List<Order> getOrderByCustomer(String id);
     List<Order> getOrderByDate(Date date);
     List<Order> getOrderByConfirm(boolean confirm);
     List<Order> getOrderByPay(boolean pay);

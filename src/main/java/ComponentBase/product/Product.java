@@ -28,10 +28,10 @@ public class Product {
     private String type;
     private Set<Image> images= new HashSet<>();
     private Set<Review> reviews = new HashSet<>();
-
+    public Product(){}
     public Product(String name, String description, double price,
                    double priceRetailer,double priceWholesaler, String category,
-                   String type, Set<Image> images, Set<Review> reviews ) {
+                   String type ) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -39,8 +39,6 @@ public class Product {
         this.priceWholesaler = priceWholesaler;
         this.category = category;
         this.type = type;
-        this.images = images;
-        this.reviews = reviews;
     }
 
     public String getId() {

@@ -1,7 +1,6 @@
 package ComponentBase.user;
 
 
-import ComponentBase.address.Address;
 import ComponentBase.role.Role;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -37,13 +36,15 @@ public class User {
     public User() {
     }
 
-    public User(String username,String name, String surname, String email, String password, Set<Role> roles) {
+    public User(String username,String name, String surname, String email, String password, Set<Role> roles,Set<Address> addresses,String phoneNumber) {
         this.username = username;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.addresses = addresses;
+        this.phoneNumber = phoneNumber;
     }
 
     @Override

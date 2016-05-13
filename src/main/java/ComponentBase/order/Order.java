@@ -25,12 +25,13 @@ public class Order {
     private double transportCost;
     private boolean confirmed;
     private boolean pay;
-    private User customer;
+    private String customerId;
 
-    public Order(Date open, Set<SelectedProduct> selectedProducts, User customer,String transportType) {
+    public Order(){}
+    public Order(Date open, Set<SelectedProduct> selectedProducts,String customerId,String transportType) {
         this.open = open;
         this.selectedProducts = selectedProducts;
-        this.customer = customer;
+        this.customerId = customerId;
         this.transportType= transportType;
     }
 
@@ -106,11 +107,11 @@ public class Order {
         this.confirmed = confirmed;
     }
 
-    public User getCustomer() {
-        return customer;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(User customer) {
-        this.customer = customer;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 }

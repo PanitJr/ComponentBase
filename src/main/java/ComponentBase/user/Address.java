@@ -1,4 +1,4 @@
-package ComponentBase.address;
+package ComponentBase.user;
 
 import ComponentBase.user.User;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,14 +22,12 @@ public class Address {
     private String district;
     private String privince;
     private String postal;
-    @OneToMany
-    private User owner;
 
     public Address() {
 
     }
 
-    public Address(String number, String village, String street, String subDistrict, String district, String privince, String postal, User owner) {
+    public Address(String number, String village, String street, String subDistrict, String district, String privince, String postal) {
         this.number = number;
         this.village = village;
         this.street = street;
@@ -37,7 +35,7 @@ public class Address {
         this.district = district;
         this.privince = privince;
         this.postal = postal;
-        this.owner = owner;
+
     }
 
     public String getId() {
@@ -104,11 +102,4 @@ public class Address {
         this.postal = postal;
     }
 
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
 }

@@ -1,6 +1,5 @@
 package ComponentBase.user;
 
-import ComponentBase.address.Address;
 import ComponentBase.repository.UserRepository;
 import ComponentBase.role.Role;
 import org.springframework.beans.factory.annotation.Autowired;

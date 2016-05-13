@@ -18,39 +18,42 @@ import java.util.List;
  * Created by panit on 5/11/2016.
  */
 @CrossOrigin
-@Controller
-@RequestMapping("/products")
+@RequestMapping("/")
+@RestController
 public class ProductController {
-    @Autowired ProductService productService;
+    @Autowired
+    ProductService productService;
 
     //CRUD
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "product/{id}",method = RequestMethod.GET)
     public Product getProduct(@PathVariable("id")String id){
         return productService.getProduct(id);
     }
-    @RequestMapping(value = "/",method = RequestMethod.GET)
+
+    @RequestMapping(value = "product",method = RequestMethod.GET)
     public List<Product> getProduct(){return productService.getProducts();}
 
-    @RequestMapping(value = "/search/",method = RequestMethod.GET)
+    @RequestMapping(value = "product/search",method = RequestMethod.GET)
     public  List<Product> getListByName(@RequestParam("name")String name){
         return productService.findByName(name);
     }
-    @RequestMapping(value = "",method = RequestMethod.POST)
+
+    @RequestMapping(value = "product",method = RequestMethod.POST)
     public @ResponseBody Product add(@RequestBody Product product, BindingResult bindingResult){
         return productService.create(product);
     }
-    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    @RequestMapping(value = "product/{id}",method = RequestMethod.PUT)
     public  Product edit(@PathVariable("id") String id,@RequestBody Product product, BindingResult bindingResult){
         return productService.edit(product);
     }
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "product/{id}",method = RequestMethod.DELETE)
     public  Product edit(@PathVariable("id") String id){
         return productService.delete(id);
     }
 
     //Service
-    @RequestMapping(value = "/addimage",method = RequestMethod.POST)
+    @RequestMapping(value = "product/addimage",method = RequestMethod.POST)
     @ResponseBody
     public Product addImage(HttpServletRequest request,
                             HttpServletResponse response, @RequestParam("productid")String productId){

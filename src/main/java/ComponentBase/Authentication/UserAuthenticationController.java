@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/watphasom")
+@RequestMapping("/auth")
 public class UserAuthenticationController {
     @Autowired
     UserDetailsService userDetailsService;

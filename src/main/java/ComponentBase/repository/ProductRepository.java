@@ -13,5 +13,5 @@ public interface ProductRepository extends MongoRepository<Product, String> {
     List<Product> findAll();
     List<Product> findByCategory(String category);
     List<Product> findByType(String type);
-    List<Product> findByNameContainOrDescriptionContainIgnoreCase(String name,String description);
+    List<Product> findByNameContaining(String name);
 }

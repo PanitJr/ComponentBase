@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface OrderService {
     List<Order> getOrders();
-    List<Order> getOrderByCustomer(User user);
+    List<Order> getOrderByCustomer(String id);
     List<Order> getOrderByDate(Date date);
     List<Order> getOrderByConfirm(boolean confirm);
     List<Order> getOrderByPay(boolean pay);
@@ -21,6 +21,7 @@ public interface OrderService {
     Order setTotalCost(Order order);
     Order setTransportCost(Order order,double transportCost);
     Order setConfirmOrder(Order Order,boolean confirm);
+    Order setConfirmPayment(Order order);
     void OrderNotification(Order order);
 
 }

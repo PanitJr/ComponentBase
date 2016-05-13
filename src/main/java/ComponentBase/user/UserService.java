@@ -1,6 +1,5 @@
 package ComponentBase.user;
 
-import ComponentBase.address.Address;
 import ComponentBase.role.Role;
 
 import java.util.Date;

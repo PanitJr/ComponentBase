@@ -47,9 +47,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/product/**").access("hasRole('admin')")
-                .antMatchers(HttpMethod.PUT,"/product/**").access("hasRole('admin')")
-                .antMatchers(HttpMethod.DELETE,"/product/**").access("hasRole('admin')")
+//                .antMatchers(HttpMethod.POST,"/product/**").access("hasRole('admin')")
+//                .antMatchers(HttpMethod.PUT,"/product/**").access("hasRole('admin')")
+//                .antMatchers(HttpMethod.DELETE,"/product/**").access("hasRole('admin')")
                 .antMatchers("/shoppingcart/**").access("hasRole('user')")
                 .and()
                 .addFilterBefore(authenticationTokenProcessingFilter,UsernamePasswordAuthenticationFilter.class);

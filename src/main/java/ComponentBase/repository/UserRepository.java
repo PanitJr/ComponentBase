@@ -1,10 +1,9 @@
 package ComponentBase.repository;
 
 import ComponentBase.role.Role;
-import ComponentBase.address.Address;
+import ComponentBase.user.Address;
 import ComponentBase.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;

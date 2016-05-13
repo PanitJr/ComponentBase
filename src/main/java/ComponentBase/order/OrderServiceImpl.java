@@ -1,10 +1,13 @@
 package ComponentBase.order;
 
 import ComponentBase.email.EmailSender;
+import ComponentBase.repository.UserRepository;
 import ComponentBase.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -22,8 +25,8 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public List<Order> getOrderByCustomer(User user) {
-        return orderDao.getOrderByCustomer(user);
+    public List<Order> getOrderByCustomer(String id) {
+        return orderDao.getOrderByCustomer(id);
     }
 
     @Override
@@ -48,13 +51,15 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Order create(Order order) {
-        OrderNotification();
+        Date date = new Date();
+        order.setOpen(date);
+        //OrderNotification();
         return orderDao.create(order);
     }
 
     @Override
     public Order update(Order order) {
-        OrderNotification();
+        //OrderNotification();
         return orderDao.update(order);
     }
 
@@ -63,20 +68,24 @@ public class OrderServiceImpl implements OrderService{
         return orderDao.delete(order);
     }
 
+    @Autowired
+    private UserRepository userRepository;
     @Override
     public Order setTotalCost(Order order) {
+
+        User customer = userRepository.findOne(order.getCustomerId());
         double total = 0;
-        if (order.getCustomer().getRole().getRoleName().equals("admin")){
+        if (customer.getRole().getRoleName().equals("admin")){
             for (SelectedProduct selectProduct: order.getSelectedProducts()) {
                 total += selectProduct.getAmount()*selectProduct.getProduct().getPrice();
             }
         }
-        else if(order.getCustomer().getRole().getRoleName().equals("retailer")){
+        else if(customer.getRole().getRoleName().equals("retailer")){
             for (SelectedProduct selectProduct: order.getSelectedProducts()) {
                 total += selectProduct.getAmount()*selectProduct.getProduct().getPriceRetailer();
             }
         }
-        else if(order.getCustomer().getRole().getRoleName().equals("wholesaler")){
+        else if(customer.getRole().getRoleName().equals("wholesaler")){
             for (SelectedProduct selectProduct: order.getSelectedProducts()) {
                 total += selectProduct.getAmount()*selectProduct.getProduct().getPriceWholesaler();
             }
@@ -87,23 +96,32 @@ public class OrderServiceImpl implements OrderService{
         }
         total += order.getTransportCost();
         order.setTotalPrice(total);
-        OrderNotification();
+        //OrderNotification();
         return orderDao.update(order);
     }
 
     @Override
     public Order setTransportCost(Order order, double transportCost) {
         order.setTransportCost(transportCost);
-        OrderNotification();
+        //OrderNotification();
         return orderDao.update(order);
     }
 
     @Override
     public Order setConfirmOrder(Order order, boolean confirm) {
         order.setConfirmed(confirm);
-        OrderNotification();
+        //OrderNotification();
         return orderDao.update(order);
     }
+
+    @Override
+    public Order setConfirmPayment(Order order) {
+        Date date = new Date();
+        order.setClose(date);
+        //OrderNotification();
+        return orderDao.create(order);
+    }
+
     @Autowired
     private EmailSender smtpMailSender;
 

@@ -23,8 +23,8 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> getOrderByCustomer(User user) {
-        return orderRepository.findByCustomer(user);
+    public List<Order> getOrderByCustomer(String id) {
+        return orderRepository.findByCustomerId(id);
     }
 
     @Override

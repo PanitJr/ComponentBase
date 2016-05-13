@@ -1,8 +1,7 @@
 package ComponentBase.user;
 
-import ComponentBase.address.Address;
+import ComponentBase.repository.RoleRepository;
 import ComponentBase.role.Role;
-import ComponentBase.role.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +20,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
     @Autowired
-    RoleService roleService;
+    RoleRepository roleRepository;
     @Override
     public List<User> getUsers() {
         return userDao.getUsers();
@@ -70,7 +69,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         Set<Role> roles = new HashSet<>();
-        roles.add(roleService.findByName("customer"));
+        roles.add(roleRepository.findByRoleName("customer"));
         user.setRoles(roles);
         return userDao.create(user);
     }
