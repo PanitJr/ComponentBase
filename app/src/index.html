@@ -1,38 +1,343 @@
 <!doctype html>
-<html ng-app="app">
+<html ng-app="app" xmlns:background-color="http://www.w3.org/1999/xhtml" xmlns:color="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8">
-    <title>app</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <meta name="author" content="">
 
-    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
-    <!-- endbower -->
-    <!-- endbuild -->
+    <title>Wat-Pha-Som-Online-Product</title>
 
-    <!-- build:css({.tmp/serve,src}) styles/app.css -->
-    <!-- inject:css -->
-    <!-- css files will be automatically insert here -->
-    <!-- endinject -->
-    <!-- endbuild -->
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/creative.css" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
-  <body>
-  <div class="page-header">
-    <h1>Watphasom E-Shop
-      <small>Power by CAMT Student</small>
+  <body id="page-top">
+  <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand page-scroll" href="#page-top">Wat-Pha-Som-Online-Product</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a class="page-scroll" href="#about">About</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="#product">Product</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="#gallery">Gallery</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="collapse navbar-collapse">
+        <div class="nav navbar-nav navbar-right" ng-include src="'app/security/login.html'"></div>
+        <ul class="nav navbar-nav navbar-right" ng-show="hasRole('foreign')">
+          <li ng-class="{'active':currentLocale== 'en'}"><a href="" ng-click="changeLanguage('en')">EN </a></li>
+          <li ng-class="{'active':currentLocale== 'fr'}"><a href="" ng-click="changeLanguage('fr')">FR</a></li>
+        </ul>
+      </div>
+    </div>
+    </div>
+    <div class="container ng-hide" ng-show="initialized">
+      <div class="alert alert-danger" ng-show="error">{{error}}</div>
+    </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+
+  <header>
+    <div class="header-content">
+      <div class="header-content-inner">
+        <h1>Welcome to Wat-Pha-Som</h1>
+        <hr>
+        <p>Wat Pha Som, Moo 2, Mooban Omlong, Tambon Mae Sap, Amphoe Samoeng, Chiang Mai, 50250</p>
+
+        <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+      </div>
+
+
+    </div>
+  </header>
+
+  <section class="bg-primary" id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+          <h2 class="section-heading">Wat-Pha-Som</h2>
+          <hr class="light">
+          <p class="text-faded">This site is present the product from wat pha som, It is an OTOP of Samoeng, Chiang Mai, Thailand. For more information contact Wat Phra Borommathat Doi Pha Som on 081-169 7983 or visit at Moo 2, Mooban Omlong, Tambon Mae Sap, Amphoe Samoeng, Chiang Mai, 50250 </p>
+          <a href="#" class="btn btn-default btn-xl">Get Started!</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="product">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading">Wat-Pha-Som Product</h2>
+          <hr class="primary">
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2">
+          <!-- Fixed left nav column -->
+          <div ng-include src="'app/component/leftnav.html'"></div>
+        </div>
+
+
+        <div class="col-md-10">
+          <!-- Breadcrumbs
+         ================================================== -->
+
+
+          <ng-view>Loading...</ng-view>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box">
+            <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
+            <h3>Top quality product</h3>
+            <p class="text-muted">We find top quality of materail to make a product.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box">
+            <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
+            <h3>Ready to Ship</h3>
+            <p class="text-muted">Our product is ready to ship</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box">
+            <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
+            <h3>Up to Date</h3>
+            <p class="text-muted">We update product to keep things fresh.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box">
+            <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
+            <h3>Made with Love</h3>
+            <p class="text-muted">We make product with love!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="no-padding" id="gallery">
+    <div class="container-fluid">
+      <div class="row no-gutter">
+        <div class="col-lg-4 col-sm-6">
+          <a href="#" class="portfolio-box">
+            <img src="img/portfolio/1.jpg" class="img-responsive" alt="">
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  Category
+                </div>
+                <div class="project-name">
+                  Project Name
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a href="#" class="portfolio-box">
+            <img src="img/portfolio/2.jpg" class="img-responsive" alt="">
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  Category
+                </div>
+                <div class="project-name">
+                  Project Name
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a href="#" class="portfolio-box">
+            <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  Category
+                </div>
+                <div class="project-name">
+                  Project Name
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a href="#" class="portfolio-box">
+            <img src="img/portfolio/4.jpg" class="img-responsive" alt="">
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  Category
+                </div>
+                <div class="project-name">
+                  Project Name
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a href="#" class="portfolio-box">
+            <img src="img/portfolio/5.jpg" class="img-responsive" alt="">
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  Category
+                </div>
+                <div class="project-name">
+                  Project Name
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a href="#" class="portfolio-box">
+            <img src="img/portfolio/6.jpg" class="img-responsive" alt="">
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  Category
+                </div>
+                <div class="project-name">
+                  Project Name
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="bg-dark">
+
+  </aside>
+
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+          <h2 class="section-heading">Contact Us!</h2>
+          <hr class="primary">
+          <p>For more information contact Wat Phra Borommathat Doi Pha Som on 081-169 7983 or visit at Moo 2, Mooban Omlong, Tambon Mae Sap, Amphoe Samoeng, Chiang Mai, 50250 !</p>
+        </div>
+        <div class="col-lg-4 col-lg-offset-2 text-center">
+          <i class="fa fa-phone fa-3x wow bounceIn"></i>
+          <p>081-169 7983, 089-926 3877</p>
+        </div>
+        <div class="col-lg-4 text-center">
+          <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+          <p><a href="mailto:your-email@your-domain.com">doiphasom@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- jQuery -->
+  <script src="js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="js/bootstrap.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="js/jquery.easing.min.js"></script>
+  <script src="js/jquery.fittext.js"></script>
+  <script src="js/wow.min.js"></script>
+
+  <!-- Custom Theme JavaScript -->
+  <script src="js/creative.js"></script>
+  <!-- End Template -->
+
+  <!--start oldapp
+  <div class="page-header" background-color: #000000; color:#8d8d8d; >
+    <h1>Pha-Som-Temple
+      <small>Online Shopping</small>
     </h1>
+
+    <div style="margin-top: 20px;" class="container">
+      <div style="background-color: #ffffff" class="jumbotron">
+        <div class="row">
+          <div class="col-md-12">
+            <img src="../images/phasom3.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+
 
   </div>
   <div class="navbar navbar-default" ng-controller="LanguageController">
     <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">Wat-Pha-Som-Online-Product</a>
+        <ul class="nav navbar-nav">
+          <li class="{true: 'active'}[menuActive('/index)]"><a href="index.html">Home</a></li>
+          <li><a href="'#/shoppingCart.html'">Shopping Cart</a></li>
+          <li><a href="#/productList.html">Product List</a></li>
+          <li><a href="#">Page 3</a></li>
+        </ul>
+      </div>
       <div class="collapse navbar-collapse">
         <div ng-include src="'app/security/login.html'"></div>
-        <ul class="nav navbar-nav navbar-right">
-          <li ng-class="{'active':currentLocale== 'en'}" ><a href="" ng-click="changeLanguage('en')">EN</a></li>
-          <li ng-class="{'active':currentLocale== 'th'}" ><a href="" ng-click="changeLanguage('th')">TH</a></li>
+        <ul class="nav navbar-nav navbar-right" ng-show="hasRole('foreign')">
+          <li ng-class="{'active':currentLocale== 'en'}"><a href="" ng-click="changeLanguage('en')">EN </a></li>
+          <li ng-class="{'active':currentLocale== 'fr'}"><a href="" ng-click="changeLanguage('fr')">FR</a></li>
         </ul>
       </div>
     </div>
@@ -41,29 +346,57 @@
     <div class="alert alert-danger" ng-show="error">{{error}}</div>
   </div>
 
+
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-2">
         <!-- Fixed left nav column -->
-        <div ng-include src="'app/components/leftnav.html'"></div>
-      </div>
-      <div class="col-md-10">
-        <!-- Breadcrumbs
-       ================================================== -->
+  <!--<div ng-include src="'app/component/leftnav.html'"></div>
+</div>
 
-        <ng-view>Loading...</ng-view>
 
+<div class="col-md-10">
+  <!-- Breadcrumbs
+ ================================================== -->
+
+
+  <!--<ng-view>Loading...</ng-view>
+
+</div>
+</div>
+</div>
+
+
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+
+Finish old app-->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <p>Copyright &copy; Champ Chicharito 2016</p>
+        </div>
       </div>
     </div>
-  </div>
+  </footer>
+
+  <!-- jQuery -->
+  <script src="js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="js/bootstrap.min.js"></script>
+
+  <!-- Script to Activate the Carousel -->
+  <script>
+    $('.carousel').carousel({
+      interval: 5000 //changes the speed
+    })
+  </script>
 
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
 
-
-  <!-- build:js(src) scripts/vendor.js -->
+    <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- run `gulp inject` to automatically populate bower script dependencies -->
     <!-- endbower -->
