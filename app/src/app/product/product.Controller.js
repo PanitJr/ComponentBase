@@ -27,6 +27,7 @@
       }
     }
   }
+
   /** @ngInject */
   function addProductController(productService,$location) {
     var vm = this;

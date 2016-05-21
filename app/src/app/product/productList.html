@@ -35,28 +35,17 @@
                 </span>
 
             <div class="col-lg-2">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Currency
-              <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-              <li><a href="#">Dollar</a></li>
-              <li><a href="#">Euro</a></li>
-            </ul>
-
-          </div>
-
-            <div class="col-lg-8">
               <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">language
                 <span class="caret"></span></button>
               <ul class="dropdown-menu">
-                <li><a href="#">English</a></li>
-                <li><a href="#">Français</a></li>
-                <li><a href="#">Español</a></li>
-                <li><a href="#">Deutsch</a></li>
-                <li><a href="#">Russian</a></li>
+                <li ng-class="{'active':currentLocale== 'en'}"><a href="" ng-click="changeLanguage('en')">English</a></li>
+                <li ng-class="{'active':currentLocale== 'fr'}"><a href="" ng-click="changeLanguage('fr')">Français</a></li>
+                <li><a href="">Thai</a></li>
               </ul>
-            </div>
 
           </div>
+
+
 
           <!-- /input-group -->
         </div>
@@ -76,7 +65,7 @@
           <th class="text-center" translate>listProduct.picture</th>
           <th class="text-center" translate ng-show="hasRole('admin')">listProduct.editProduct</th>
           <th class="text-center" translate ng-show="hasRole('admin')">listProduct.removeProduct</th>
-          <th class="text-center" translate ng-show="hasRole('customer') || hasRole('retailer') || hasRole('wholesaler')" >listProduct.addToCart</th>
+          <th class="text-center" translate ng-show="hasRole('customer') || hasRole('retailer') || hasRole('wholesaler')">listProduct.addToCart</th>
         </tr>
         <tr ng-repeat="product in vm.products">
           <td>{{$index+1}}</td>
@@ -97,7 +86,7 @@
                                                                    aria-hidden="true"
                                                                    ng-click="vm.deleteProduct(product.id)"></span></a></td>
 
-          <td class="text-center" ng-show="hasRole('customer')"><a ng-href="#/listProduct"><span class="glyphicon glyphicon-shopping-cart"
+          <td class="text-center" ng-show="hasRole('customer') || hasRole('retailer') || hasRole('wholesaler')"><a ng-href="#/listProduct"><span class="glyphicon glyphicon-shopping-cart"
                                                                                             aria-hidden="true"
                                                                                                  ng-click="vm.updateCart"></span></a></td>
         </tr>

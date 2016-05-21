@@ -16,7 +16,7 @@
       </li>
 
       <li ng-class="{true: 'active'}[menuActive('/shoppingCart')]">
-        <a href="#/shoppingCart/:id'" ng-show="hasRole('customer' || 'retailer' || 'wholesaler')">Shopping Cart</a>
+        <a href="#/shoppingCart/:id'" ng-show="hasRole('customer') || hasRole('retailer') || hasRole('wholesaler')">Shopping Cart</a>
       </li>
 
       <li ng-class="{true: 'active'}[menuActive('/register')]">

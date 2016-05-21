@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading" ng-show="vm.addProduct">Add new product</div>
+    <div class="panel-heading" ng-show="vm.addProduct" ng-hide="vm.editProduct">Add new product</div>
     <div class="panel-heading" ng-show="vm.editProduct">Edit Product</div>
     <div class="panel-body">
     <div class="col-lg-6">
@@ -47,7 +47,7 @@
 
           <div class="form-group">
             <label for="wholesalePrice">Wholesaler price :</label>
-            <input type="number" name="price" ng-model="vm.product.price"class="form-control" id="wholesalePrice"
+            <input type="number" name="price" ng-model="vm.product.wholesalePrice"class="form-control" id="wholesalePrice"
                    placeholder="Wholesaler price" type="number" required/>
 
             <div class="alert alert-danger" role="alert" ng-show="vm.productprice.$error.required">
@@ -63,7 +63,7 @@
           </div>
           <div class="form-group">
             <label for="retailPrice">Retailer price :</label>
-            <input type="number" name="price" ng-model="vm.product.price"class="form-control" id="retailPrice"
+            <input type="number" name="price" ng-model="vm.product.retailPrice"class="form-control" id="retailPrice"
                    placeholder="Retailer price" type="number" required/>
 
             <div class="alert alert-danger" role="alert" ng-show="vm.productprice.$error.required">
@@ -92,7 +92,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary" ng-show="vm.addProduct" ng-click="vm.addProduct($flow)">Add</button>
-            <button type="submit" class="btn btn-primary" ng-show="vm.editProduct" ng-click="vm.editProduct($flow)">Edit</button>
+            <button type="submit" class="btn btn-primary" ng-show="vm.editProduct" ng-click="vm.editProduct()">Edit</button>
 
         </form>
     </div>

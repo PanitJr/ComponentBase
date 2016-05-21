@@ -29,6 +29,11 @@
     controller: 'editUserController',
     controllerAs: 'vm'
 }).
+    when('/listUser',{
+      templateUrl: 'app/user/list.html',
+      controller: 'listUserController',
+      controllerAs: 'vm'
+    }).
     when('/addProduct',{
       templateUrl: 'app/product/editProduct.html',
       controller: 'addProductController',
