@@ -9,7 +9,7 @@
             <band height="45">
                 <staticText>
                     <reportElement style="Title" x="190" y="0" width="188" height="40" />
-                    <text><![CDATA[City report]]></text>
+                    <text><![CDATA[Order report]]></text>
                 </staticText>
             </band>
         </groupHeader>
@@ -21,12 +21,16 @@
         <groupHeader>
             <band height="22" splitType="Stretch">
                 <staticText>
-                    <reportElement style="Head" x="70" y="0" width="150" height="20" />
-                    <text><![CDATA[Name]]></text>
+                    <reportElement style="Head" x="20" y="0" width="50" height="20" />
+                    <text><![CDATA[Date]]></text>
                 </staticText>
                 <staticText>
-                    <reportElement style="Head" x="230" y="0" width="148" height="20"  />
-                    <text><![CDATA[Population]]></text>
+                    <reportElement style="Head" x="70" y="0" width="50" height="20"  />
+                    <text><![CDATA[To]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement style="Head" x="120" y="0" width="200" height="20"  />
+                    <text><![CDATA[Address]]></text>
                 </staticText>
             </band>
         </groupHeader>
@@ -37,12 +41,12 @@
     <detail>
         <band height="21" splitType="Stretch">
             <textField>
-                <reportElement x="70" y="0" width="150" height="20" />
-                <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+                <reportElement x="70" y="0" width="50" height="20" />
+                <textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="230" y="0" width="148" height="20" />
-                <textFieldExpression><![CDATA[$F{population}]]></textFieldExpression>
+                <reportElement x="120" y="0" width="200" height="20" />
+                <textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
             </textField>
             <line>
                 <reportElement positionType="FixRelativeToBottom" x="3" y="12" width="555" height="1" />

@@ -476,4 +476,8 @@ body {
     webkit-tap-highlight-color: #222;
 }
 
+label.pocLabel {
+  width: 150px;
+
+}
 

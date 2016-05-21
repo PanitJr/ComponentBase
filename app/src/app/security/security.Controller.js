@@ -1,42 +1,37 @@
+/**
+ * Created by waiti on 4/22/2016.
+ */
 (function () {
-  angular
-    .module('app')
-    .controller('LoginController', LoginController);
 
-  function serializeData( data ) {
-    // If this is not an object, defer to native stringification.
-    if ( ! angular.isObject( data ) ) {
-      return( ( data == null ) ? "" : data.toString() );
+  angular.module('app').controller('LoginController',LoginController);
+  function serializeData(data) {
+    //if this not an object
+    if(!angular.isObject(data)){
+      return((data == null)?"": data.toString());
     }
-
     var buffer = [];
-
-    // Serialize each key in the object.
-    for ( var name in data ) {
-      if ( ! data.hasOwnProperty( name ) ) {
+    //Serializ each key in the obj
+    for (var name in data){
+      if(!data.hasOwnProperty(name)){
         continue;
       }
-
-      var value = data[ name ];
-
+      var value =  data[name];
       buffer.push(
-        encodeURIComponent( name ) + "=" + encodeURIComponent( ( value == null ) ? "" : value )
+        encodeURIComponent(name)+"="+encodeURIComponent((value == null)?"": value)
       );
     }
-
-    // Serialize the buffer and clean it up for transportation.
-    var source = buffer.join( "&" ).replace( /%20/g, "+" );
-    return( source );
+    //
+    var source = buffer.join("&").replace(/%20/g,"+");
+    return(source);
   }
-  /** @ngInject */
-  function LoginController($scope, $rootScope, $location, $cookies, UserService) {
+  /**ngInject*/
+  function LoginController($rootScope,$location,$cookies,UserService)
+  {
     var vm = this;
     vm.rememberMe = false;
-
-
     vm.login = function () {
+
       UserService.authenticate(serializeData({username:vm.username,password:vm.password}),
-        //success connection
         function (authenticationResult) {
           var authToken = authenticationResult.token;
           $rootScope.authToken = authToken;
@@ -46,15 +41,14 @@
           UserService.get(function (user) {
             $rootScope.user = user;
             $location.path("/")
-          });
-          delete $rootScope.error;
-        }, // unsuccess connection
-        function (error) {
-          if (error.status == "401") {
-            $rootScope.error = " user name or password is not correct";
+          })
+          //delete $rootScope.error;
+        },
+        function(error){
+          if (error.status == "401"){
+            $rootScope.error =" user name or passoword is not correct";
           }
         })
     }
   }
-
 })();

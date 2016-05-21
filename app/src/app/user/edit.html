@@ -1,0 +1,79 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Edit Account</div>
+  <div class="panel-body">
+    <div class="col-lg-6">
+      <div class="form-group">
+
+        <label class="pocLabel" for="username">Username: </label>
+        <input type="text" required id="username" name="username" ng-model="vm.user.username">
+        <div class="alert alert-danger" role="alert" ng-show="vm.register.username.$error.required">
+          <span class="sr-only">Error:</span>
+          username is Required!
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="pocLabel" for="password">Password: </label>
+        <input type="password" required id="password" name="password" ng-model="vm.user.password">
+        <div class="alert alert-danger" role="alert" ng-show="vm.register.password.$error.required">
+          <span class="sr-only">Error:</span>
+          password is Required!
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="pocLabel" for="confirmPassword">confirm-Password</label>
+        <input type="password" required id="confirmPassword" name="confirmPassword" ng-model="vm.confirmPassword"
+               ng-change="vm.confirmPasswordCheck(confirmPassword)">
+        <div class="alert alert-danger" role="alert" ng-show="vm.confirm">
+          <span class="sr-only">Error:</span>
+          Not match with password!
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="pocLabel" for="email">E-mail: </label>
+        <input type="email" required id="email" name="email" ng-model="vm.user.email">
+        <div class="alert alert-danger" role="alert" ng-show="vm.register.email.$error.required">
+          <span class="sr-only">Error:</span>
+          email is Required!
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="pocLabel" for="email">Name: </label>
+        <input type="text" required id="name" name="name" ng-model="vm.user.name">
+        <div class="alert alert-danger" role="alert" ng-show="vm.register.name.$error.required">
+          <span class="sr-only">Error:</span>
+          name is Required!
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="pocLabel" for="surname">Surname: </label>
+        <input type="text" required id="surname" name="surname" ng-model="vm.user.surname">
+        <div class="alert alert-danger" role="alert" ng-show="vm.register.surname.$error.required">
+          <span class="sr-only">Error:</span>
+          surname is Required!
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="pocLabel" for="dob">Date Of Birth: </label>
+        <input type="date" required id="dob" name="dob" ng-model="vm.user.dob">
+        <div class="alert alert-danger" role="alert" ng-show="vm.register.dob.$error.required">
+          <span class="sr-only">Error:</span>
+          Date Of Birth is Required!
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="pocLabel" for="phoneNumber">Mobile Phone: </label>
+        <input type="tel" required id="phoneNumber" name="phoneNumber" ng-model="vm.user.phoneNumber">
+        <div class="alert alert-danger" role="alert" ng-show="vm.register.phoneNumber.$error.required">
+          <span class="sr-only">Error:</span>
+          Phone number is Required!
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" ng-click="vm.addUser()">Edit</button>
+
+
+    </div>
+  </div>
+</div>
+</div>
+</div>

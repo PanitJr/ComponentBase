@@ -11,9 +11,25 @@
         <a href="#/addProduct" ng-show="hasRole('admin')">Add Product</a>
       </li>
 
-      <li ng-class="{true: 'active'}[menuActive('/shoppingCart')]">
-        <a href="#/shoppingCart" ng-show="hasRole('user')">Shopping Cart</a>
+      <li ng-class="{true: 'active'}[menuActive('/userst')]">
+        <a href="#/users" ng-show="hasRole('admin')">User Account List</a>
       </li>
+
+      <li ng-class="{true: 'active'}[menuActive('/shoppingCart')]">
+        <a href="#/shoppingCart/:id'" ng-show="hasRole('customer' || 'retailer' || 'wholesaler')">Shopping Cart</a>
+      </li>
+
+      <li ng-class="{true: 'active'}[menuActive('/register')]">
+        <a href="#/register" ng-hide="hasRole('admin') || hasRole('customer') || hasRole('retailer') || hasRole('wholesaler')" >Register</a>
+      </li>
+      <li ng-class="{true: 'active'}[menuActive('/forgotPassword')]">
+        <a href="#/forgotpassword" ng-hide="hasRole('admin') || hasRole('customer') || hasRole('retailer') || hasRole('wholesaler')" >Forgot Password</a>
+      </li>
+      <li ng-class="{true: 'active'}[menuActive('/notification')]">
+        <a href="#/notification" ng-show="hasRole('admin') || hasRole('customer') || hasRole('retailer') || hasRole('wholesaler')">Notification</a>
+      </li>
+      <li ng-class="{true: 'active'}[menuActive('/editUser')]">
+        <a href="#/editUser" ng-show="hasRole('admin') || hasRole('customer') || hasRole('retailer') || hasRole('wholesaler')">My Account</a>
 
     </ul>
 </div><!--/.well -->

@@ -28,6 +28,7 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
     <![endif]-->
   </head>
   <body id="page-top">
@@ -51,6 +52,9 @@
             <a class="page-scroll" href="#about">About</a>
           </li>
           <li>
+            <a class="page-scroll" href="#product">Register</a>
+          </li>
+          <li>
             <a class="page-scroll" href="#product">Product</a>
           </li>
           <li>
@@ -64,11 +68,12 @@
 
       <div class="collapse navbar-collapse">
         <div class="nav navbar-nav navbar-right" ng-include src="'app/security/login.html'"></div>
-        <ul class="nav navbar-nav navbar-right" ng-show="hasRole('foreign')">
-          <li ng-class="{'active':currentLocale== 'en'}"><a href="" ng-click="changeLanguage('en')">EN </a></li>
-          <li ng-class="{'active':currentLocale== 'fr'}"><a href="" ng-click="changeLanguage('fr')">FR</a></li>
+                <ul class="nav navbar-nav navbar-right">
+
         </ul>
       </div>
+
+
     </div>
     </div>
     <div class="container ng-hide" ng-show="initialized">
@@ -89,7 +94,6 @@
         <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
       </div>
 
-
     </div>
   </header>
 
@@ -105,6 +109,7 @@
       </div>
     </div>
   </section>
+
 
   <section id="product">
     <div class="container">

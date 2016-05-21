@@ -1,18 +1,15 @@
-<div class="row-fluid">
-    <div class="row" ng-show="vm.addPerson">
-        <h1>Add new product</h1>
-    </div>
-    <div class="row" ng-show="vm.editPerson">
-        <h1>Edit Product</h1>
-    </div>
-    <div class="col-md-4">
-        <form name="editform" novalidate flow-init>
+<div class="panel panel-default">
+    <div class="panel-heading" ng-show="vm.addProduct">Add new product</div>
+    <div class="panel-heading" ng-show="vm.editProduct">Edit Product</div>
+    <div class="panel-body">
+    <div class="col-lg-6">
+        <form name="addProduct" novalidate flow-init>
             <div class="form-group">
                 <!-- Sidebar content-->
                 <label for="productname">name :</label>
-                <input ng-model="vm.product.name" class="form-control" id="productname" name="productname" placeholder="name" required/>
+                <input type="text" name="name" ng-model="vm.product.name" class="form-control" id="productname" name="productname" placeholder="name" required/>
 
-                <div class="alert alert-danger" role="alert" ng-show="vm.editform.productname.$error.required">
+                <div class="alert alert-danger" role="alert" ng-show="vm.productname.$error.required">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <span class="sr-only">Error:</span>
                     Product name is Required!
@@ -20,10 +17,10 @@
             </div>
             <div class="form-group">
                 <label for="productdescription">Description :</label>
-                <input ng-model="vm.product.description" class="form-control" id="productdescription"
+                <input type="text" name="description" ng-model="vm.product.description"class="form-control" id="productdescription"
                        placeholder="description" name="productdescription" required/>
 
-                <div class="alert alert-danger" role="alert" ng-show="vm.editform.productdescription.$error.required">
+                <div class="alert alert-danger" role="alert" ng-show="vm.productdescription.$error.required">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <span class="sr-only">Error:</span>
                     Description is Required!
@@ -32,22 +29,58 @@
             </div>
             <div class="form-group">
                 <label for="productprice">price :</label>
-                <input ng-model="vm.product.totalPrice" name="productprice" class="form-control" id="productprice"
+                <input type="number" name="price" ng-model="vm.product.price"class="form-control" id="productprice"
                        placeholder="price" type="number" required/>
 
-                <div class="alert alert-danger" role="alert" ng-show="vm.editform.productprice.$error.required">
+                <div class="alert alert-danger" role="alert" ng-show="vm.productprice.$error.required">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <span class="sr-only">Error:</span>
                     Price is Required!
                 </div>
-                <div class="alert alert-danger" role="alert" ng-show="vm.editform.productprice.$error.number">
+                <div class="alert alert-danger" role="alert" ng-show="vm.productprice.$error.number">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <span class="sr-only">Error:</span>
                     Enter the number!!
                 </div>
 
             </div>
-            <div class="form-group">
+
+          <div class="form-group">
+            <label for="wholesalePrice">Wholesaler price :</label>
+            <input type="number" name="price" ng-model="vm.product.price"class="form-control" id="wholesalePrice"
+                   placeholder="Wholesaler price" type="number" required/>
+
+            <div class="alert alert-danger" role="alert" ng-show="vm.productprice.$error.required">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+              Wholesaler price is Required!
+            </div>
+            <div class="alert alert-danger" role="alert" ng-show="vm.productprice.$error.number">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+              Enter the number!!
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="retailPrice">Retailer price :</label>
+            <input type="number" name="price" ng-model="vm.product.price"class="form-control" id="retailPrice"
+                   placeholder="Retailer price" type="number" required/>
+
+            <div class="alert alert-danger" role="alert" ng-show="vm.productprice.$error.required">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+              Retailer price is Required!
+            </div>
+            <div class="alert alert-danger" role="alert" ng-show="vm.productprice.$error.number">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+              Enter the number!!
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
                 <input type="file" flow-btn/>
                 <table>
                     <tr ng-repeat="file in $flow.files">
@@ -58,8 +91,10 @@
                 </table>
             </div>
 
-            <button type="submit" class="btn btn-default" ng-click="vm.addProduct($flow)">Add</button>
-            <button type="submit" class="btn btn-default" ng-click="vm.editProduct()">Edit</button>
+            <button type="submit" class="btn btn-primary" ng-show="vm.addProduct" ng-click="vm.addProduct($flow)">Add</button>
+            <button type="submit" class="btn btn-primary" ng-show="vm.editProduct" ng-click="vm.editProduct($flow)">Edit</button>
+
         </form>
     </div>
+</div>
 </div>
